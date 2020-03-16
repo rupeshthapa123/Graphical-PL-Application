@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Graphical_PL_Application
 {
-    public partial class Form1 : Form
+    public partial class GPLApplication : Form
     {
-        public Form1()
+        public GPLApplication()
         {
             InitializeComponent();
         }
