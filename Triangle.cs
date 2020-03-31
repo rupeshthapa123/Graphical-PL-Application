@@ -7,21 +7,21 @@ using System.Drawing;
 
 namespace Graphical_PL_Application
 {
-    public class Triangle : Command, IShape
+    public class Triangle : IShape
     {
-        private float wid;
-        private float hght;
-        private float hypt;
-        public void GetValue(float width, float height, float hypotenus, float radius)
+        private float widths;
+        private float heights;
+        private float hypotnus;
+        public void GetValues(float width, float height, float hypotenus, float radius)
         {
-            wid = width;
-            hght = height;
-            hypt = hypotenus;
+            widths = width;
+            heights = height;
+            hypotnus = hypotenus;
         }
         public Boolean checkTriangleValidity()
         {
-            // check condition 
-            if (wid + hght <= hypt || wid + hypt <= hght || hght + hypt <= wid)
+            // check condition for triangle
+            if (widths + heights <= hypotnus || widths + hypotnus <= heights || heights + hypotnus <= widths)
                 return false;
             else
                 return true;
@@ -30,25 +30,19 @@ namespace Graphical_PL_Application
         {
             if (checkTriangleValidity())
             {
-               
-                Pen myPen = new Pen(Color.Black, 5);
-                Point[] pnt = new Point[3];
+                Pen mypn = new Pen(Color.Black,5);
+                Point[] points= new Point[3];
 
-                pnt[0].X = x;
-                pnt[0].Y = y;
+                points[0].X = x;
+                points[0].Y = y;
 
-                pnt[1].X = Convert.ToInt32( x - wid);
-                pnt[1].Y = y;
+                points[1].X = Convert.ToInt32(x - widths);
+                points[1].Y = y;
 
-                pnt[2].X = x;
-                pnt[2].Y = Convert.ToInt32(y - hght);
+                points[2].X = x;
+                points[2].Y = Convert.ToInt32(y - heights);
 
-                g.DrawPolygon(myPen, pnt);
-                /*
-                Pen drawingPen = new Pen(Brushes.Black, 5);
-                g.DrawLine(drawingPen, new Point(0, 50), new Point(50, 0));
-                g.DrawLine(drawingPen, new Point(50, 0), new Point(50, 100));
-                g.DrawLine(drawingPen, new Point(50, 100), new Point(0, 50));*/
+                g.DrawPolygon(mypn, points);
             }
         }   
     }

@@ -9,7 +9,7 @@ namespace Graphical_PL_Application
 {
     public interface IShape
     {
-       void Draw(Graphics g, int x, int y);
-       void GetValue(float width, float height, float hypot, float radius);
+       void Draw(Graphics g,int x,int y);
+       void GetValues(float width, float height, float hypotenus, float radius);
     }
 }

@@ -8,7 +8,7 @@ namespace Graphical_PL_Application
 {
     public class ShapeFactory
     {
-        public IShape Getshape(string ShapeType)
+        public IShape Getshapes(string ShapeType)
         {
             if (ShapeType == null)
             {

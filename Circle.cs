@@ -9,15 +9,9 @@ namespace Graphical_PL_Application
 {
     public class Circle : IShape
     {
-        private float wid;
-        private float hght;
-        private float hypt;
         private float rad;
-        public void GetValue(float width, float height, float hypotenus, float radius)
+        public void GetValues(float width, float height, float hypotenus, float radius)
         {
-            wid = width;
-            hght = height;
-            hypt = hypotenus;
             rad = radius;
         }
         public void Draw(Graphics g,int x,int y)

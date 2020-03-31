@@ -64,7 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
-    <Compile Include="Command.cs" />
+    <Compile Include="Command.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommandValidations.cs" />
     <Compile Include="GPLApplication.cs">
       <SubType>Form</SubType>
     </Compile>
