@@ -131,7 +131,12 @@ namespace Graphical_PL_Application
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            txtErrorOutput.Text = "";
+            string help = "Commands :\r\n moveto X,Y  =>(Move Pen Postion) \r\n drawto X,Y =>(Move Position)" +
+                "\r\n \r\nDraw Commands :\r\n( Circle radius )\r\n( Rectangle Width,height )" +
+                "\r\n(Triangle width,height,hypotenus)";
 
+            txtErrorOutput.Text = help;
         }
     }
 }
