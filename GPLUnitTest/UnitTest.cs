@@ -76,8 +76,9 @@ namespace GPLUnitTest
             //act
             Graphical_PL_Application.Triangle tangle = new Graphical_PL_Application.Triangle();
             tangle.GetValues(width, height, hypotenus, 0);
-            bool actual = tangle.checkTriangleValidity();
+
             //assert
+            bool actual = tangle.checkTriangleValidity();
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -91,8 +92,8 @@ namespace GPLUnitTest
             //act
             Graphical_PL_Application.CommandValidations cmdval = new Graphical_PL_Application.CommandValidations(tb);
             cmdval.CheckCmdLineValidation(tb.Text);
+            //assert
             bool actual = cmdval.IsCmdValid;
-
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -106,8 +107,22 @@ namespace GPLUnitTest
             //act
             Graphical_PL_Application.CommandValidations cmdval = new Graphical_PL_Application.CommandValidations(tb);
             cmdval.CheckCmdLineValidation(tb.Text);
+            
+            //assert
             bool actual = cmdval.IsParameterValid;
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void SyntaxValidationTest()
+        {
+            TextBox tb = new TextBox();
+            tb.Text = "abcdf";
+            bool expected = false;
 
+            Graphical_PL_Application.CommandValidations cmdval = new Graphical_PL_Application.CommandValidations(tb);
+            cmdval.CheckCmdLineValidation(tb.Text);
+
+            bool actual = cmdval.IsSyntaxValid;
             Assert.AreEqual(expected, actual);
         }
     }

@@ -52,7 +52,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(983, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(985, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,21 +69,21 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -166,15 +166,15 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Location = new System.Drawing.Point(369, 52);
+            this.panel1.Location = new System.Drawing.Point(371, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(602, 393);
+            this.panel1.Size = new System.Drawing.Size(602, 383);
             this.panel1.TabIndex = 9;
             // 
             // txtErrorOutput
             // 
             this.txtErrorOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtErrorOutput.Location = new System.Drawing.Point(12, 270);
+            this.txtErrorOutput.Location = new System.Drawing.Point(12, 260);
             this.txtErrorOutput.Multiline = true;
             this.txtErrorOutput.Name = "txtErrorOutput";
             this.txtErrorOutput.ReadOnly = true;
@@ -186,7 +186,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(983, 453);
+            this.ClientSize = new System.Drawing.Size(985, 443);
             this.Controls.Add(this.txtErrorOutput);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
