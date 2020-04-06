@@ -1,37 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Graphical_PL_Application
 {
+    /// <summary>
+    /// Main class. 
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class GPLApplication : Form
     {
         Graphics g;
+        /// <summary>
+        /// Initializes the new instance of <see cref="GPLApplication"/> class.
+        /// </summary>
         public GPLApplication()
         {
             InitializeComponent();
-            g = panel1.CreateGraphics();       
+            g = panel1.CreateGraphics();
         }
+        /// <summary>
+        /// Handles click event for run button. 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnexecute_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != null && !textBox1.Text.Equals(""))
             {
                 CommandValidations cmdval = new CommandValidations(textBox1);
-                if(!cmdval.IsCommandInvalid)
+                if (!cmdval.IsCommandInvalid)
                 {
                     try
-                    {                        
+                    {
                         string comm = textBox1.Text;
                         Command c = new Command();
-                        c.MainCommandline(comm, g);
+                        c.MainCommandline(comm, g, panel1);
                     }
                     catch (Exception exc)
                     {
@@ -66,17 +71,18 @@ namespace Graphical_PL_Application
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
             txtErrorOutput.Text = "";
             panel1.Refresh();
         }
         private void btnreset_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            txtErrorOutput.Text = "";
-            panel1.Refresh();
             g.ResetTransform();
         }
+        /// <summary>
+        /// save the commands to given location.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -91,12 +97,16 @@ namespace Graphical_PL_Application
                     MessageBox.Show("File Saved Successfully");
                 }
             }
-            catch(IOException)
+            catch (IOException)
             {
-                MessageBox.Show("Error","IO Exception");
+                MessageBox.Show("Error", "IO Exception");
             }
         }
-
+        /// <summary>
+        /// Load the saved commands from a location in drive to textox.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -119,20 +129,27 @@ namespace Graphical_PL_Application
                     }
                 }
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 MessageBox.Show("Error", "File not Found");
             }
             catch (IOException)
             {
                 MessageBox.Show("Error", "IO exception");
-            }        
+            }
         }
-
+        /// <summary>
+        /// Show the commands in texbox once help is clicked. 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             txtErrorOutput.Text = "";
-            string help = "Commands :\r\n moveto X,Y  =>(Move Pen Postion) \r\n drawto X,Y =>(Move Position)" +
+            string help = "Commands :\r\n moveto X,Y  =>(Move Pen Postion) " +
+                "\r\n drawto X,Y =>(Move Position)" +
+                "\r\n clear =>(Clear drawing area) " +
+                "\r\n reset =>(Move pen position to default)" +
                 "\r\n \r\nDraw Commands :\r\n( Circle radius )\r\n( Rectangle Width,height )" +
                 "\r\n(Triangle width,height,hypotenus)";
 

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Graphical_PL_Application
+﻿namespace Graphical_PL_Application
 {
+    /// <summary>
+    /// ShapeFactory class. 
+    /// </summary>
     public class ShapeFactory
     {
+        /// <summary>
+        /// Get the shape implementing interface.
+        /// </summary>
+        /// <param name="ShapeType">String</param>
+        /// <returns>Shape</returns>
         public IShape Getshapes(string ShapeType)
         {
             if (ShapeType == null)

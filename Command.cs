@@ -1,25 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Graphical_PL_Application
 {
+    /// <summary>
+    /// Command class.
+    /// </summary>
+    /// <seealso cref="GPLApplication" />
     public class Command : GPLApplication
-    {  
+    {
         private int movetoX;
         private int movetoY;
         private int drawtoX;
         private int drawtoY;
-      
-        String[] maincommand = { "moveto", "drawto"};
-        String[] shapecommand = { "circle", "rectangle", "triangle"};
         
-        public void MainCommandline(string textcmdline, Graphics graph)
+        String[] maincommand = { "moveto", "drawto", "clear", "reset" };
+        String[] shapecommand = { "circle", "rectangle", "triangle" };
+        /// <summary>
+        /// Main commandline functon.
+        /// </summary>
+        /// <param name="textcmdline">string.</param>
+        /// <param name="graph">Graphics.</param>
+        /// <param name="pnl">Panel.</param>
+        public void MainCommandline(string textcmdline, Graphics graph, Panel pnl)
         {
             try
             {
@@ -63,6 +69,14 @@ namespace Graphical_PL_Application
                         drawtoX = int.Parse(parameters[0]);
                         drawtoY = int.Parse(parameters[1]);
                         graph.TranslateTransform(drawtoX, drawtoY);
+                    }
+                    else if (CommandFirstWord.ToLower().Equals("clear"))
+                    {
+                        pnl.Refresh();
+                    }
+                    else if (CommandFirstWord.ToLower().Equals("reset"))
+                    {
+                        graph.ResetTransform();
                     }
                 }
 
@@ -111,7 +125,7 @@ namespace Graphical_PL_Application
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
