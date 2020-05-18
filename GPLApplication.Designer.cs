@@ -69,21 +69,21 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -98,7 +98,7 @@
             // 
             this.btnexecute.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnexecute.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnexecute.Location = new System.Drawing.Point(12, 213);
+            this.btnexecute.Location = new System.Drawing.Point(14, 234);
             this.btnexecute.Name = "btnexecute";
             this.btnexecute.Size = new System.Drawing.Size(94, 37);
             this.btnexecute.TabIndex = 3;
@@ -114,14 +114,14 @@
             this.textBox1.Location = new System.Drawing.Point(12, 52);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(351, 140);
+            this.textBox1.Size = new System.Drawing.Size(351, 176);
             this.textBox1.TabIndex = 4;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button1.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(143, 213);
+            this.button1.Location = new System.Drawing.Point(145, 234);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 37);
             this.button1.TabIndex = 5;
@@ -133,7 +133,7 @@
             // 
             this.btnreset.BackColor = System.Drawing.Color.Firebrick;
             this.btnreset.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnreset.Location = new System.Drawing.Point(271, 213);
+            this.btnreset.Location = new System.Drawing.Point(273, 234);
             this.btnreset.Name = "btnreset";
             this.btnreset.Size = new System.Drawing.Size(92, 37);
             this.btnreset.TabIndex = 6;
@@ -163,18 +163,19 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Location = new System.Drawing.Point(371, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(602, 400);
+            this.panel1.Size = new System.Drawing.Size(602, 412);
             this.panel1.TabIndex = 9;
             // 
             // txtErrorOutput
             // 
             this.txtErrorOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtErrorOutput.Location = new System.Drawing.Point(12, 277);
+            this.txtErrorOutput.Location = new System.Drawing.Point(12, 289);
             this.txtErrorOutput.Multiline = true;
             this.txtErrorOutput.Name = "txtErrorOutput";
             this.txtErrorOutput.ReadOnly = true;
@@ -186,7 +187,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(985, 460);
+            this.ClientSize = new System.Drawing.Size(985, 472);
             this.Controls.Add(this.txtErrorOutput);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);

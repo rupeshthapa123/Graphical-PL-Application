@@ -27,16 +27,15 @@ namespace Graphical_PL_Application
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnexecute_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != null && !textBox1.Text.Equals(""))
+            if (textBox1.Text != null && !textBox1.Equals(""))
             {
                 CommandValidations cmdval = new CommandValidations(textBox1);
                 if (!cmdval.IsCommandInvalid)
                 {
                     try
                     {
-                        string comm = textBox1.Text;
                         Command c = new Command();
-                        c.MainCommandline(comm, g, panel1);
+                        c.loadCommand( textBox1, g, panel1);
                     }
                     catch (Exception exc)
                     {
@@ -45,11 +44,11 @@ namespace Graphical_PL_Application
                 }
                 else if (!cmdval.IsSyntaxValid)
                 {
-                    txtErrorOutput.Text += "\r\n Command Syntax Error.";
+                    txtErrorOutput.Text += "\r\n Command Not Found.";
                 }
                 else if (!cmdval.IsParameterValid)
                 {
-                    txtErrorOutput.Text += "\r\n Paramter Error.";
+                    txtErrorOutput.Text += "\r\n Paramter error.";
                 }
                 else
                 {

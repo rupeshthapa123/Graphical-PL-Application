@@ -15,11 +15,9 @@ namespace GPLUnitTest
             {
                 //arrange
                 float rad = 100;
-
                 //act
                 Graphical_PL_Application.Circle cc = new Graphical_PL_Application.Circle();
                 cc.GetValues(0, 0, 0, rad);
-
                 //Assert
                 Assert.IsTrue(true);
             }
@@ -116,7 +114,7 @@ namespace GPLUnitTest
         public void SyntaxValidationTest()
         {
             TextBox tb = new TextBox();
-            tb.Text = "abcdf";
+            tb.Text = "asdf";
             bool expected = false;
 
             Graphical_PL_Application.CommandValidations cmdval = new Graphical_PL_Application.CommandValidations(tb);
