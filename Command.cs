@@ -16,7 +16,9 @@ namespace Graphical_PL_Application
         private int movetoY;
         private int drawtoX;
         private int drawtoY;
-
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int radius = 0;
         public int width = 0;
         public int height = 0;
@@ -28,9 +30,9 @@ namespace Graphical_PL_Application
         Panel pnldraw;
         Graphics graph;
 
-        String[] maincommand = { "moveto", "drawto", "clear", "reset" };
+        String[] maincommand = { "moveto", "drawto", "clear", "reset", "loop", "endloop", "if", "endif" };
         String[] shapecommand = { "circle", "rectangle", "triangle" };
-        String[] variable = { "radius", "width", "height", "hypotenus" };
+        String[] variable = { "radius", "width", "height", "counter", "hypotenus" };
 
         public void loadCommand(TextBox textBoxCmd, Graphics graph, Panel panelDraw)
         {
@@ -52,8 +54,9 @@ namespace Graphical_PL_Application
         }
         private void RunCommand(String singleLineCommand)
         {
+            ShapeFactory sf = new ShapeFactory();
             Boolean hasEquals = singleLineCommand.Contains("=");
-            Boolean hasRepeat = singleLineCommand.Contains("+");
+            Boolean hasplus = singleLineCommand.Contains("+");
             singleLineCommand = Regex.Replace(singleLineCommand, @"\s+", " ");
             if (hasEquals)
             {
@@ -140,6 +143,7 @@ namespace Graphical_PL_Application
                     }
                 }
             }
+          
             else
             {
                 MainCommandline(singleLineCommand);
@@ -242,10 +246,9 @@ namespace Graphical_PL_Application
                         {
                             parameters[i] = parameters[i].Trim();
                         }
-
                         IShape shp = sf.Getshapes("triangle");
                         shp.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), float.Parse(parameters[2]), 0);
-                        shp.Draw(graph, 0, 0);
+                        shp.Draw(graph,0,0);
                     }
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Graphical_PL_Application
 {
@@ -48,18 +49,22 @@ namespace Graphical_PL_Application
             if (checkTriangleValidity())
             {
                 Pen mypn = new Pen(Color.Black, 5);
+                
                 Point[] points = new Point[3];
+                points[0].X = 10;
+                points[0].Y = 10;
 
-                points[0].X = x;
-                points[0].Y = y;
+                points[1].X = Convert.ToInt32(50 - widths);
+                points[1].Y = 10;
 
-                points[1].X = Convert.ToInt32(x - widths);
-                points[1].Y = y;
-
-                points[2].X = x;
-                points[2].Y = Convert.ToInt32(y - heights);
+                points[2].X = 10;
+                points[2].Y = Convert.ToInt32(50 - heights);
 
                 g.DrawPolygon(mypn, points);
+            }
+            else
+            {
+                MessageBox.Show("Value not provided properly");
             }
         }
     }

@@ -142,15 +142,15 @@ namespace Graphical_PL_Application
                         {
                             if (!IsParameterValid)
                             {
-                                MessageBox.Show("Paramter error at : " + LineNumber);
+                                MessageBox.Show("Paramter error at Line : " + LineNumber);
                             }
                             else if (!IsSyntaxValid)
                             {
-                                MessageBox.Show("Command Not Found Error at : " + LineNumber);
+                                MessageBox.Show("Command Not Found. Error at Line : " + LineNumber);
                             }
                             else
                             {
-                                MessageBox.Show("Syntax error at : " + LineNumber);
+                                MessageBox.Show("Syntax error at Line: " + LineNumber);
                             }
                             IsCommandInvalid = true;
                         }
