@@ -150,7 +150,7 @@ namespace Graphical_PL_Application
                             }
                             else
                             {
-                                MessageBox.Show("Syntax error at Line: " + LineNumber);
+                                MessageBox.Show("Command error at Line: " + LineNumber);
                             }
                             IsCommandInvalid = true;
                         }
@@ -408,6 +408,9 @@ namespace Graphical_PL_Application
                 IsCommandInvalid = true;
             }
         }
+        /// <summary>
+        /// Check the loop and if command validation. 
+        /// </summary>
         public void CheckCmdLoopAndIfValidation()
         {
             int numberOfLines = textBoxCmd.Lines.Length;

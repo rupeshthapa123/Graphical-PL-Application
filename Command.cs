@@ -20,11 +20,30 @@ namespace Graphical_PL_Application
         /// Global variable. 
         /// </summary>
         public int radius = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int width = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int height = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int hypotenus = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int counter = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
         public int loopnumber = 0;
+        /// <summary>
+        /// Global variable. 
+        /// </summary>
+        public int dsize = 0;
 
         TextBox textBox;
         Panel pnldraw;
@@ -32,8 +51,13 @@ namespace Graphical_PL_Application
 
         String[] maincommand = { "moveto", "drawto", "clear", "reset", "loop", "endloop", "if", "endif" };
         String[] shapecommand = { "circle", "rectangle", "triangle" };
-        String[] variable = { "radius", "width", "height", "counter", "hypotenus" };
-
+        String[] variable = { "radius", "width", "height", "counter", "hypotenus", "size" };
+        /// <summary>
+        /// Load the command for run or execution.
+        /// </summary>
+        /// <param name="textBoxCmd"></param>
+        /// <param name="graph"></param>
+        /// <param name="panelDraw"></param>
         public void loadCommand(TextBox textBoxCmd, Graphics graph, Panel panelDraw)
         {
             this.textBox = textBoxCmd;
@@ -52,6 +76,10 @@ namespace Graphical_PL_Application
                 }
             }
         }
+        /// <summary>
+        /// function for running loop statement commands.
+        /// </summary>
+        /// <param name="singleLineCommand"></param>
         private void RunCommand(String singleLineCommand)
         {
             ShapeFactory sf = new ShapeFactory();
@@ -143,12 +171,109 @@ namespace Graphical_PL_Application
                     }
                 }
             }
-          
+            else if (hasplus)
+            {
+                singleLineCommand = System.Text.RegularExpressions.Regex.Replace(singleLineCommand, @"\s+", " ");
+                string[] words = singleLineCommand.Split(' ');
+                if (words[0].ToLower().Equals("repeat"))
+                {
+                    counter = int.Parse(words[1]);
+                    if (words[2].ToLower().Equals("circle"))
+                    {
+                        int increaseValue = GetSize(singleLineCommand);
+                        radius = increaseValue;
+                        for (int j = 0; j < counter; j++)
+                        {
+                            IShape sh = sf.Getshapes("circle");
+                            sh.GetValues(0, 0, 0, radius);
+                            sh.Draw(graph, 0, 0);
+                            radius += increaseValue;
+                        }
+                    }
+                    else if (words[2].ToLower().Equals("rectangle"))
+                    {
+                        int increaseValue = GetSize(singleLineCommand);
+                        dsize = increaseValue;
+                        for (int j = 0; j < counter; j++)
+                        {
+                            IShape shc = sf.Getshapes("rectangle");
+                            shc.GetValues(dsize, dsize, 0, 0);
+                            shc.Draw(graph, 0, 0);
+                            dsize += increaseValue;
+                        }
+                    }
+                    else if (words[2].ToLower().Equals("triangle"))
+                    {
+                        int increaseValue = GetSize(singleLineCommand);
+                        dsize = increaseValue;
+                        for (int j = 0; j < counter; j++)
+                        {
+                            IShape shp = sf.Getshapes("triangle");
+                            shp.GetValues(dsize,dsize,dsize, 0);
+                            shp.Draw(graph, 0, 0);
+                            dsize += increaseValue;
+                        }
+                    }
+
+                }
+                else
+                {
+                    string[] words2 = singleLineCommand.Split('+');
+                    for (int j = 0; j < words2.Length; j++)
+                    {
+                        words2[j] = words2[j].Trim();
+                    }
+                    if (words2[0].ToLower().Equals("radius"))
+                    {
+                        radius += int.Parse(words2[1]);
+                    }
+                    else if (words2[0].ToLower().Equals("width"))
+                    {
+                        width += int.Parse(words2[1]);
+                    }
+                    else if (words2[0].ToLower().Equals("height"))
+                    {
+                        height += int.Parse(words2[1]);
+                    }
+                }
+            }
             else
             {
                 MainCommandline(singleLineCommand);
             }
         }
+        /// <summary>
+        /// Get the size for loop functions. 
+        /// </summary>
+        /// <param name="lineCommand"></param>
+        /// <returns></returns>
+        private int GetSize(string lineCommand)
+        {
+            int value = 0;
+            if (lineCommand.ToLower().Contains("radius"))
+            {
+                int pos = (lineCommand.IndexOf("radius") + 6);
+                int size = lineCommand.Length;
+                String tempLine = lineCommand.Substring(pos, (size - pos));
+                tempLine = tempLine.Trim();
+                String newTempLine = tempLine.Substring(1, (tempLine.Length - 1));
+                newTempLine = newTempLine.Trim();
+                value = int.Parse(newTempLine);
+
+            }
+            else if (lineCommand.ToLower().Contains("size"))
+            {
+                int pos = (lineCommand.IndexOf("size") + 4);
+                int size = lineCommand.Length;
+                String tempLine = lineCommand.Substring(pos, (size - pos));
+                tempLine = tempLine.Trim();
+                String newTempLine = tempLine.Substring(1, (tempLine.Length - 1));
+                newTempLine = newTempLine.Trim();
+                value = int.Parse(newTempLine);
+            }
+            return value;
+        }
+
         /// <summary>
         /// Main commandline functon.
         /// </summary>
@@ -213,15 +338,27 @@ namespace Graphical_PL_Application
                     if (CommandFirstWord.ToLower().Equals("circle"))
                     {
                         String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
-                        String[] parameters = cmdargs.Split(',');
+                        String[] parameters = cmdargs.Split(' ');
                         for (int i = 0; i < parameters.Length; i++)
                         {
                             parameters[i] = parameters[i].Trim();
                         }
-
-                        IShape sh = sf.Getshapes("circle");
-                        sh.GetValues(0, 0, 0, float.Parse(cmdwords[1]));
-                        sh.Draw(graph, 0, 0);
+                        Boolean secondWordIsVariable = variable.Contains(parameters[0].ToLower());
+                        if (secondWordIsVariable)
+                        {
+                            if (parameters[0].ToLower().Equals("radius"))
+                            {
+                                IShape sh = sf.Getshapes("circle");
+                                sh.GetValues(0, 0, 0, radius);
+                                sh.Draw(graph, 0, 0);
+                            }
+                        }
+                        else
+                        {
+                            IShape sh = sf.Getshapes("circle");
+                            sh.GetValues(0, 0, 0, float.Parse(parameters[0]));
+                            sh.Draw(graph, 0, 0);
+                        }
                     }
 
                     else if (CommandFirstWord.ToLower().Equals("rectangle"))
@@ -232,12 +369,40 @@ namespace Graphical_PL_Application
                         {
                             parameters[i] = parameters[i].Trim();
                         }
+                        Boolean secondWordIsVariable = variable.Contains(parameters[0].ToLower());
+                        Boolean thirdWordIsVariable = variable.Contains(parameters[1].ToLower());
+                        if (secondWordIsVariable)
+                        {
+                            if (thirdWordIsVariable)
+                            {
+                                IShape shc = sf.Getshapes("rectangle");
+                                shc.GetValues(width, height, 0, 0);
+                                shc.Draw(graph, 0, 0);
+                            }
+                            else
+                            {
+                                IShape shc = sf.Getshapes("rectangle");
+                                shc.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), 0, 0);
+                                shc.Draw(graph, 0, 0);
+                            }
+                        }
+                        else
+                        {
+                            if (thirdWordIsVariable)
+                            {
 
-                        IShape shc = sf.Getshapes("rectangle");
-                        shc.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), 0, 0);
-                        shc.Draw(graph, 0, 0);
+                                IShape shc = sf.Getshapes("rectangle");
+                                shc.GetValues(width, height, 0, 0);
+                                shc.Draw(graph, 0, 0);
+                            }
+                            else
+                            {
+                                IShape shc = sf.Getshapes("rectangle");
+                                shc.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), 0, 0);
+                                shc.Draw(graph, 0, 0);
+                            }
+                        }
                     }
-
                     else if (CommandFirstWord.ToLower().Equals("triangle"))
                     {
                         String cmdargs = textcmdline.Substring(8, (textcmdline.Length - 8));
@@ -247,13 +412,13 @@ namespace Graphical_PL_Application
                             parameters[i] = parameters[i].Trim();
                         }
                         IShape shp = sf.Getshapes("triangle");
-                        shp.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), float.Parse(parameters[2]), 0);
+                        shp.GetValues(float.Parse(parameters[0]), float.Parse(parameters[1]), float.Parse(parameters[2]),0);
                         shp.Draw(graph,0,0);
                     }
                 }
                 else
                 {
-                    if (CommandFirstWord.Equals("loop"))
+                    if (CommandFirstWord.ToLower().Equals("loop"))
                     {
                         counter = int.Parse(cmdwords[1]);
                         int loopStartLine = (GetStartLineNumber("loop"));
@@ -272,7 +437,7 @@ namespace Graphical_PL_Application
                             }
                         }
                     }
-                    else if (CommandFirstWord.Equals("if"))
+                    else if (CommandFirstWord.ToLower().Equals("if"))
                     {
                         Boolean loop = false;
                         if (cmdwords[1].ToLower().Equals("radius"))
@@ -327,6 +492,11 @@ namespace Graphical_PL_Application
                 MessageBox.Show(ex.Message);
             }
         }
+        /// <summary>
+        /// Get the start line number for loop and if.
+        /// </summary>
+        /// <param name="syntax"></param>
+        /// <returns></returns>
         public int GetStartLineNumber(string syntax)
         {
             int numberOfCmdLines = textBox.Lines.Length;
@@ -334,21 +504,26 @@ namespace Graphical_PL_Application
             for (int i = 0; i < numberOfCmdLines; i++)
             {
                 String oneLineCommand = textBox.Lines[i];
-                oneLineCommand = Regex.Replace(oneLineCommand, @"\s+", " ");
+                oneLineCommand = Regex.Replace(oneLineCommand, @"\s+", " ");             
                 string[] words = oneLineCommand.Split(' ');
                 //removing white spaces in between words
-                for (int j = 0; j < words.Length; j++)
+                for (int j = 0; j < words.Length; j++)    
                 {
-                    words[j] = words[j].Trim();
-                }
+                  words[j] = words[j].Trim();
+                }    
                 String firstWord = words[0].ToLower();
                 if (firstWord.Equals(syntax))
                 {
-                    lineNum = i + 1;
+                    lineNum = i + 1;    
                 }
             }
             return lineNum;
         }
+        /// <summary>
+        /// Get the end line number for loop and if.
+        /// </summary>
+        /// <param name="syntax"></param>
+        /// <returns></returns>
         public int GetEndLineNumber(string syntax)
         {
             int numberOfCmdLines = textBox.Lines.Length;

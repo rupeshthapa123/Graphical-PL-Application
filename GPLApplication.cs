@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Graphical_PL_Application
 {
@@ -12,6 +13,11 @@ namespace Graphical_PL_Application
     public partial class GPLApplication : Form
     {
         Graphics g;
+        Boolean moving = false;
+        private int x, y = -1;
+        Pen pen;
+        Color maincolor;
+        private int size = 2;
         /// <summary>
         /// Initializes the new instance of <see cref="GPLApplication"/> class.
         /// </summary>
@@ -19,7 +25,10 @@ namespace Graphical_PL_Application
         {
             InitializeComponent();
             g = panel1.CreateGraphics();
+            pen = new Pen(maincolor, size);
+            addPenSizes();
         }
+
         /// <summary>
         /// Handles click event for run button. 
         /// </summary>
@@ -66,7 +75,7 @@ namespace Graphical_PL_Application
         }
         private void GPLApplication_Load(object sender, EventArgs e)
         {
-
+           
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -132,27 +141,77 @@ namespace Graphical_PL_Application
             {
                 MessageBox.Show("Error", "File not Found");
             }
-            catch (IOException)
-            {
-                MessageBox.Show("Error", "IO exception");
-            }
         }
+
         /// <summary>
-        /// Show the commands in texbox once help is clicked. 
+        /// Show the commands in texbox once hint is clicked. 
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        private void hintToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            txtErrorOutput.Text = "";
-            string help = "Commands :\r\n moveto X,Y  =>(Move Pen Postion) " +
-                "\r\n drawto X,Y =>(Move Position)" +
-                "\r\n clear =>(Clear drawing area) " +
-                "\r\n reset =>(Move pen position to default)" +
-                "\r\n \r\nDraw Commands :\r\n( Circle radius )\r\n( Rectangle Width,height )" +
-                "\r\n(Triangle width,height,hypotenus)";
+            try
+            {
+                txtErrorOutput.Text = "";
+                string help = "Commands :\r\n moveto X,Y  =>(Move Pen Postion) " +
+                    "\r\n drawto X,Y =>(Move Position)" +
+                    "\r\n clear =>(Clear drawing area) " +
+                    "\r\n reset =>(Move pen position to default)" +
+                    "\r\n \r\nDraw Commands :\r\n( Circle radius )\r\n( Rectangle Width,height )" +
+                    "\r\n(Triangle width,height,hypotenus)";
 
-            txtErrorOutput.Text = help;
+                txtErrorOutput.Text = help;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            moving = true;
+            x = e.X;
+            y = e.Y;
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (moving && x != -1 && y != -1)
+            {
+                g.DrawLine(pen, new Point(x, y), e.Location);
+                x = e.X;
+                y = e.Y;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                button2.BackColor = colorDialog1.Color;
+                maincolor = colorDialog1.Color;
+            }
+            pen = new Pen(maincolor, size);
+        }
+        private void addPenSizes()
+        {
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(new String[] { "1", "2", "4", "6", "8" });
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            size = Convert.ToInt32(comboBox1.SelectedItem.ToString());
+            pen = new Pen(maincolor, size);
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            moving = false;
+            x = -1;
+            y = -1;
         }
     }
 }
