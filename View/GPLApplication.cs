@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace Graphical_PL_Application
 {
@@ -17,7 +16,7 @@ namespace Graphical_PL_Application
         private int x, y = -1;
         Pen pen;
         Color maincolor;
-        private int size = 2;
+        private int size;
         /// <summary>
         /// Initializes the new instance of <see cref="GPLApplication"/> class.
         /// </summary>
@@ -26,7 +25,6 @@ namespace Graphical_PL_Application
             InitializeComponent();
             g = panel1.CreateGraphics();
             pen = new Pen(maincolor, size);
-            addPenSizes();
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace Graphical_PL_Application
         }
         private void GPLApplication_Load(object sender, EventArgs e)
         {
-           
+            addPenSizes();
         }
         private void button1_Click(object sender, EventArgs e)
         {

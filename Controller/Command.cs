@@ -41,7 +41,7 @@ namespace Graphical_PL_Application
         /// </summary>
         public int loopnumber = 0;
         /// <summary>
-        /// Global variable. 
+        /// Global variable.
         /// </summary>
         public int dsize = 0;
 
@@ -65,7 +65,6 @@ namespace Graphical_PL_Application
             this.graph = graph;
 
             int numberOfLines = textBoxCmd.Lines.Length;
-      
             for (loopnumber = 0; loopnumber < numberOfLines; loopnumber++)
             {
                 String oneLineCommand = textBoxCmd.Lines[loopnumber];
@@ -119,6 +118,14 @@ namespace Graphical_PL_Application
                         }
 
                     }
+                    else if (words[1].ToLower().Equals("hypotenus"))
+                    {
+                        if (hypotenus == int.Parse(words[3]))
+                        {
+                            loop = true;
+                        }
+
+                    }
                     else if (words[1].ToLower().Equals("counter"))
                     {
                         if (counter == int.Parse(words[3]))
@@ -126,8 +133,8 @@ namespace Graphical_PL_Application
                             loop = true;
                         }
                     }
-                    int ifStartLine = (GetStartLineNumber("if"));
-                    int ifEndLine = (GetEndLineNumber("endif") - 1);
+                    int ifStartLine = (GetIfStartLineNumber());
+                    int ifEndLine = (GetEndifEndLineNumber() - 1);
                     loopnumber = ifEndLine;
                     if (loop)
                     {
@@ -164,6 +171,10 @@ namespace Graphical_PL_Application
                     else if (words2[0].ToLower().Equals("height"))
                     {
                         height = int.Parse(words2[1]);
+                    }
+                    else if (words2[0].ToLower().Equals("hypotenus"))
+                    {
+                        hypotenus = int.Parse(words2[1]);
                     }
                     else if (words2[0].ToLower().Equals("counter"))
                     {
@@ -235,6 +246,10 @@ namespace Graphical_PL_Application
                     {
                         height += int.Parse(words2[1]);
                     }
+                    else if (words2[0].ToLower().Equals("hypotenus"))
+                    {
+                        hypotenus += int.Parse(words2[1]);
+                    }
                 }
             }
             else
@@ -295,58 +310,14 @@ namespace Graphical_PL_Application
                 Boolean firstWordShape = shapecommand.Contains(CommandFirstWord);
 
                 ShapeFactory sf = new ShapeFactory();
-
-                if (firstWordCommand)
-                {
-                    if (CommandFirstWord.ToLower().Equals("moveto"))
-                    {
-                        String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
-                        String[] parameters = cmdargs.Split(',');
-                        for (int i = 0; i < parameters.Length; i++)
-                        {
-                            parameters[i] = parameters[i].Trim();
-                        }
-                        movetoX = int.Parse(parameters[0]);
-                        movetoY = int.Parse(parameters[1]);
-                        graph.TranslateTransform(movetoX, movetoY);
-                    }
-
-                    else if (CommandFirstWord.ToLower().Equals("drawto"))
-                    {
-                        String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
-                        String[] parameters = cmdargs.Split(',');
-                        for (int i = 0; i < parameters.Length; i++)
-                        {
-                            parameters[i] = parameters[i].Trim();
-                        }
-                        drawtoX = int.Parse(parameters[0]);
-                        drawtoY = int.Parse(parameters[1]);
-                        graph.TranslateTransform(drawtoX, drawtoY);
-                    }
-                    else if (CommandFirstWord.ToLower().Equals("clear"))
-                    {
-                        pnldraw.Refresh();
-                    }
-                    else if (CommandFirstWord.ToLower().Equals("reset"))
-                    {
-                        graph.ResetTransform();
-                    }
-                }
-
-                else if (firstWordShape)
+                if (firstWordShape)
                 {
                     if (CommandFirstWord.ToLower().Equals("circle"))
                     {
-                        String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
-                        String[] parameters = cmdargs.Split(' ');
-                        for (int i = 0; i < parameters.Length; i++)
-                        {
-                            parameters[i] = parameters[i].Trim();
-                        }
-                        Boolean secondWordIsVariable = variable.Contains(parameters[0].ToLower());
+                        Boolean secondWordIsVariable = variable.Contains(cmdwords[1].ToLower());
                         if (secondWordIsVariable)
                         {
-                            if (parameters[0].ToLower().Equals("radius"))
+                            if (cmdwords[1].ToLower().Equals("radius"))
                             {
                                 IShape sh = sf.Getshapes("circle");
                                 sh.GetValues(0, 0, 0, radius);
@@ -356,7 +327,7 @@ namespace Graphical_PL_Application
                         else
                         {
                             IShape sh = sf.Getshapes("circle");
-                            sh.GetValues(0, 0, 0, float.Parse(parameters[0]));
+                            sh.GetValues(0, 0, 0, float.Parse(cmdwords[1]));
                             sh.Draw(graph, 0, 0);
                         }
                     }
@@ -416,13 +387,46 @@ namespace Graphical_PL_Application
                         shp.Draw(graph,0,0);
                     }
                 }
-                else
+                else if(firstWordCommand)
                 {
-                    if (CommandFirstWord.ToLower().Equals("loop"))
+                    if (CommandFirstWord.ToLower().Equals("moveto"))
+                    {
+                        String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
+                        String[] parameters = cmdargs.Split(',');
+                        for (int l = 0; l < parameters.Length; l++)
+                        {
+                            parameters[l] = parameters[l].Trim();
+                        }
+                        movetoX = int.Parse(parameters[0]);
+                        movetoY = int.Parse(parameters[1]);
+                        graph.TranslateTransform(movetoX, movetoY);
+                    }
+
+                    else if (CommandFirstWord.ToLower().Equals("drawto"))
+                    {
+                        String cmdargs = textcmdline.Substring(6, (textcmdline.Length - 6));
+                        String[] parameters = cmdargs.Split(',');
+                        for (int m = 0; m < parameters.Length; m++)
+                        {
+                            parameters[m] = parameters[m].Trim();
+                        }
+                        drawtoX = int.Parse(parameters[0]);
+                        drawtoY = int.Parse(parameters[1]);
+                        graph.TranslateTransform(drawtoX, drawtoY);
+                    }
+                    else if (CommandFirstWord.ToLower().Equals("clear"))
+                    {
+                        pnldraw.Refresh();
+                    }
+                    else if (CommandFirstWord.ToLower().Equals("reset"))
+                    {
+                        graph.ResetTransform();
+                    }
+                    else if (CommandFirstWord.ToLower().Equals("loop"))
                     {
                         counter = int.Parse(cmdwords[1]);
-                        int loopStartLine = (GetStartLineNumber("loop"));
-                        int loopEndLine = (GetEndLineNumber("endloop") - 1);
+                        int loopStartLine = (GetLoopStartLineNumber());
+                        int loopEndLine = (GetLoopEndLineNumber() - 1);
                         loopnumber = loopEndLine;
                         for (int i = 0; i < counter; i++)
                         {
@@ -462,6 +466,14 @@ namespace Graphical_PL_Application
                             }
 
                         }
+                        else if (cmdwords[1].ToLower().Equals("hypotenus"))
+                        {
+                            if (hypotenus == int.Parse(cmdwords[1]))
+                            {
+                                loop = true;
+                            }
+
+                        }
                         else if (cmdwords[1].ToLower().Equals("counter"))
                         {
                             if (counter == int.Parse(cmdwords[1]))
@@ -469,8 +481,8 @@ namespace Graphical_PL_Application
                                 loop = true;
                             }
                         }
-                        int ifStartLine = (GetStartLineNumber("if"));
-                        int ifEndLine = (GetEndLineNumber("endif") - 1);
+                        int ifStartLine = (GetIfStartLineNumber());
+                        int ifEndLine = (GetEndifEndLineNumber() - 1);
                         loopnumber = ifEndLine;
                         if (loop)
                         {
@@ -485,6 +497,7 @@ namespace Graphical_PL_Application
                             }
                         }
                     }
+
                 }
             }
             catch (Exception ex)
@@ -492,47 +505,85 @@ namespace Graphical_PL_Application
                 MessageBox.Show(ex.Message);
             }
         }
-        /// <summary>
-        /// Get the start line number for loop and if.
-        /// </summary>
-        /// <param name="syntax"></param>
-        /// <returns></returns>
-        public int GetStartLineNumber(string syntax)
+        private int GetEndifEndLineNumber()
         {
-            int numberOfCmdLines = textBox.Lines.Length;
+            int numberOfLines = textBox.Lines.Length;
             int lineNum = 0;
-            for (int i = 0; i < numberOfCmdLines; i++)
+
+            for (int i = 0; i < numberOfLines; i++)
             {
                 String oneLineCommand = textBox.Lines[i];
-                oneLineCommand = Regex.Replace(oneLineCommand, @"\s+", " ");             
-                string[] words = oneLineCommand.Split(' ');
-                //removing white spaces in between words
-                for (int j = 0; j < words.Length; j++)    
+                oneLineCommand = oneLineCommand.Trim();
+                if (oneLineCommand.ToLower().Equals("endif"))
                 {
-                  words[j] = words[j].Trim();
-                }    
-                String firstWord = words[0].ToLower();
-                if (firstWord.Equals(syntax))
-                {
-                    lineNum = i + 1;    
+                    lineNum = i + 1;
+
                 }
             }
             return lineNum;
         }
-        /// <summary>
-        /// Get the end line number for loop and if.
-        /// </summary>
-        /// <param name="syntax"></param>
-        /// <returns></returns>
-        public int GetEndLineNumber(string syntax)
+
+        private int GetIfStartLineNumber()
         {
-            int numberOfCmdLines = textBox.Lines.Length;
+            int numberOfLines = textBox.Lines.Length;
             int lineNum = 0;
-            for (int i = 0; i < numberOfCmdLines; i++)
+
+            for (int i = 0; i < numberOfLines; i++)
+            {
+                String oneLineCommand = textBox.Lines[i];
+                oneLineCommand = Regex.Replace(oneLineCommand, @"\s+", " ");
+                string[] words = oneLineCommand.Split(' ');
+
+                for (int j = 0; j < words.Length; j++)
+                {
+                    words[j] = words[j].Trim();
+                }
+                String firstWord = words[0].ToLower();
+                oneLineCommand = oneLineCommand.Trim();
+                if (firstWord.ToLower().Equals("if"))
+                {
+                    lineNum = i + 1;
+
+                }
+            }
+            return lineNum;
+        }
+
+        private int GetLoopEndLineNumber()
+        {
+            int numberOfLines = textBox.Lines.Length;
+            int lineNum = 0;
+
+            for (int i = 0; i < numberOfLines; i++)
             {
                 String oneLineCommand = textBox.Lines[i];
                 oneLineCommand = oneLineCommand.Trim();
-                if (oneLineCommand.ToLower().Equals(syntax))
+                if (oneLineCommand.ToLower().Equals("endloop"))
+                {
+                    lineNum = i + 1;
+
+                }
+            }
+            return lineNum;
+        }
+
+        private int GetLoopStartLineNumber()
+        {
+            int numberOfLines = textBox.Lines.Length;
+            int lineNum = 0;
+
+            for (int i = 0; i < numberOfLines; i++)
+            {
+                String oneLineCommand = textBox.Lines[i];
+                oneLineCommand = Regex.Replace(oneLineCommand, @"\s+", " ");
+                string[] words = oneLineCommand.Split(' ');
+                for (int j = 0; j < words.Length; j++)
+                {
+                    words[j] = words[j].Trim();
+                }
+                String firstWord = words[0].ToLower();
+                oneLineCommand = oneLineCommand.Trim();
+                if (firstWord.ToLower().Equals("loop"))
                 {
                     lineNum = i + 1;
                 }
