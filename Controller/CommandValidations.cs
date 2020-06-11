@@ -156,6 +156,11 @@ namespace Graphical_PL_Application
                         }
                     }
                 }
+                CheckCmdLoopAndIfValidation();
+                if (!IsCmdValid)
+                {
+                    IsCommandInvalid = true;
+                }
             }
         }
         /// <summary>
@@ -282,6 +287,7 @@ namespace Graphical_PL_Application
                         {
                             if (Variables.Contains(commandsAfterSpliting[1].ToLower()))
                             {
+                                checkIfVariableDefined(commandsAfterSpliting[1]);
                             }
                             else
                             {
@@ -318,6 +324,7 @@ namespace Graphical_PL_Application
                             {
                                 if (Variables.Contains(parameter[i].ToLower()))
                                 {
+                                    checkIfVariableDefined(parameter[i]);
                                 }
                                 else
                                 {
@@ -355,6 +362,7 @@ namespace Graphical_PL_Application
                             {
                                 if (Variables.Contains(parameter[i].ToLower()))
                                 {
+                                    checkIfVariableDefined(parameter[i]);
                                 }
                                 else
                                 {
@@ -473,6 +481,50 @@ namespace Graphical_PL_Application
                     IsCmdValid = false;
                     MessageBox.Show("IF Not Ended with 'ENDIF'");
                 }
+            }
+        }
+        /// <summary>
+        /// check the variable whether defined or not.
+        /// </summary>
+        /// <param name="variable"></param>
+        public void checkIfVariableDefined(string variable)
+        {
+            Boolean isvariablefound = false;
+            if (textBoxCmd.Lines.Length > 1)
+            {
+                if (lineNumber > 0)
+                {
+                    for (int i = 0; i < lineNumber; i++)
+                    {
+                        String oneLineCommand = textBoxCmd.Lines[i];
+                        oneLineCommand = oneLineCommand.Trim();
+                        if (!oneLineCommand.Equals(""))
+                        {
+                            Boolean isVariableDefined = oneLineCommand.ToLower().Contains(variable.ToLower());
+                            if (isVariableDefined)
+                            {
+                                isvariablefound = true;
+                            }
+                        }
+
+                    }
+                    if (!isvariablefound)
+                    {
+                        MessageBox.Show("Variable is not defined");
+                        IsCmdValid = false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Variable is not defined");
+                    IsCmdValid = false;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Variable is not defined");
+                IsCmdValid = false;
             }
         }
     }

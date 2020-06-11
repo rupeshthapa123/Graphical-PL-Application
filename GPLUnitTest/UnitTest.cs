@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Graphical_PL_Application;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -122,6 +123,40 @@ namespace GPLUnitTest
 
             bool actual = cmdval.IsSyntaxValid;
             Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void checkLoopAndIfValidation()
+        {
+            String input;
+            Boolean expectedOutcome;
+            Boolean realOutcome;
+            TextBox textbox = new TextBox();
+            input = "counter = 5 \r\n If counter = 5 then \r\n radius = 100 \r\n Circle radius \r\n EndIf";
+            textbox.Text = input;
+            expectedOutcome = true;
+
+            CommandValidations validation = new CommandValidations(textbox);
+            validation.CheckCmdLoopAndIfValidation();
+
+            realOutcome = validation.IsCmdValid;
+            Assert.AreEqual(expectedOutcome, realOutcome);
+        }
+        [TestMethod]
+        public void checkIfVariableDefinedTest()
+        {
+            String input;
+            Boolean expectedOutcome;
+            Boolean realOutcome;
+            TextBox textbox = new TextBox();
+            input = "Radius = 20 \r\n Circle Radius";
+            expectedOutcome = true;
+
+            textbox.Text = input;
+            CommandValidations validation = new CommandValidations(textbox);
+            validation.checkIfVariableDefined("radius");
+
+            realOutcome = validation.IsCmdValid;
+            Assert.AreEqual(expectedOutcome, realOutcome);
         }
     }
 }
