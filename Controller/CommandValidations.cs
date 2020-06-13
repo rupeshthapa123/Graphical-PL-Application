@@ -152,9 +152,9 @@ namespace Graphical_PL_Application
                             {
                                 MessageBox.Show("Command error at Line: " + LineNumber);
                             }
-                            IsCommandInvalid = true;
+                            IsCmdValid = true;
                         }
-                    }
+                    }                 
                 }
                 CheckCmdLoopAndIfValidation();
                 if (!IsCmdValid)
@@ -402,7 +402,7 @@ namespace Graphical_PL_Application
                     }
                 }
                 else
-                {
+                { 
                     IsCmdValid = false;
                 }
             }
@@ -424,40 +424,60 @@ namespace Graphical_PL_Application
             int numberOfLines = textBoxCmd.Lines.Length;
             for (int i = 0; i < numberOfLines; i++)
             {
-                String singleLineCmd = textBoxCmd.Lines[i];
-                singleLineCmd = singleLineCmd.Trim();
-                if (!singleLineCmd.Equals(""))
+                String oneLineCommand = textBoxCmd.Lines[i];
+                oneLineCommand = oneLineCommand.Trim();
+                if (!oneLineCommand.Equals(""))
                 {
-                    DoesCmdHasLoop = Regex.IsMatch(singleLineCmd.ToLower(), "loop");
-                    if (DoesCmdHasLoop)
+                    doesCmdHasLoop = Regex.IsMatch(oneLineCommand.ToLower(), @"\bloop\b");
+                    if (doesCmdHasLoop)
                     {
-                        LoopLineNo = (i + 1);
+                        loopLineNo = (i + 1);
                     }
-                    DoesCmdHasEndLoop = singleLineCmd.ToLower().Contains("endloop");
-                    if (DoesCmdHasEndLoop)
+                    doesCmdHasEndLoop = oneLineCommand.ToLower().Contains("endloop");
+                    if (doesCmdHasEndLoop)
                     {
-                        EndLoopLineNo = (i + 1);
+                        endLoopLineNo = (i + 1);
                     }
-                    DoesCmdHasIf = Regex.IsMatch(singleLineCmd.ToLower(), "if");
-                    if (DoesCmdHasIf)
+                    doesCmdHasIf = Regex.IsMatch(oneLineCommand.ToLower(), @"\bif\b");
+                    if (doesCmdHasIf)
                     {
-                        IfLineNo = (i + 1);
+                        ifLineNo = (i + 1);
                     }
-                    DoesCmdHasEndif = singleLineCmd.ToLower().Contains("endif");
-                    if (DoesCmdHasEndif)
+                    doesCmdHasEndif = oneLineCommand.ToLower().Contains("endif");
+                    if (doesCmdHasEndif)
                     {
-                        EndIfLineNo = (i + 1);
+                        endIfLineNo = (i + 1);
                     }
                 }
             }
-            if (DoesCmdHasLoop)
+            if (loopLineNo > 0)
             {
-                if (DoesCmdHasEndLoop)
+                doesCmdHasLoop = true;
+            }
+            if (endLoopLineNo > 0)
+            {
+                doesCmdHasLoop = true;
+            }
+            if (ifLineNo > 0)
+            {
+                doesCmdHasIf = true;
+            }
+            if (endIfLineNo > 0)
+            {
+                doesCmdHasEndif = true;
+            }
+            if (doesCmdHasLoop)
+            {
+                if (doesCmdHasEndLoop)
                 {
-                    if (LoopLineNo > EndLoopLineNo)
+                    if (loopLineNo < endLoopLineNo)
+                    {
+
+                    }
+                    else
                     {
                         IsCmdValid = false;
-                        MessageBox.Show("'ENDLOOP' must be after loop start: Loop starts at" + LoopLineNo + " Loop ends at: " + EndLoopLineNo);
+                        MessageBox.Show("'ENDLOOP' must be after loop start");
                     }
                 }
                 else
@@ -466,14 +486,18 @@ namespace Graphical_PL_Application
                     MessageBox.Show("Loop Not Ended with 'ENDLOOP'");
                 }
             }
-            if (DoesCmdHasIf)
+            if (doesCmdHasIf)
             {
-                if (DoesCmdHasEndif)
+                if (doesCmdHasIf)
                 {
-                    if (EndIfLineNo < IfLineNo)
+                    if (ifLineNo < endIfLineNo)
+                    {
+
+                    }
+                    else
                     {
                         IsCmdValid = false;
-                        MessageBox.Show("'ENDIF' must be after IF: If starts at" + IfLineNo + " and ends at: " + EndIfLineNo);
+                        MessageBox.Show("'ENDIF' must be after IF");
                     }
                 }
                 else
