@@ -59,7 +59,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1060, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1175, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -76,21 +76,21 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -120,7 +120,7 @@
             // 
             this.btnexecute.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnexecute.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnexecute.Location = new System.Drawing.Point(12, 317);
+            this.btnexecute.Location = new System.Drawing.Point(12, 333);
             this.btnexecute.Name = "btnexecute";
             this.btnexecute.Size = new System.Drawing.Size(94, 37);
             this.btnexecute.TabIndex = 3;
@@ -136,14 +136,14 @@
             this.textBox1.Location = new System.Drawing.Point(12, 52);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(351, 259);
+            this.textBox1.Size = new System.Drawing.Size(351, 275);
             this.textBox1.TabIndex = 4;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button1.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(143, 317);
+            this.button1.Location = new System.Drawing.Point(143, 333);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 37);
             this.button1.TabIndex = 5;
@@ -155,7 +155,7 @@
             // 
             this.btnreset.BackColor = System.Drawing.Color.Firebrick;
             this.btnreset.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnreset.Location = new System.Drawing.Point(271, 317);
+            this.btnreset.Location = new System.Drawing.Point(271, 333);
             this.btnreset.Name = "btnreset";
             this.btnreset.Size = new System.Drawing.Size(92, 37);
             this.btnreset.TabIndex = 6;
@@ -191,7 +191,7 @@
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Location = new System.Drawing.Point(371, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(677, 498);
+            this.panel1.Size = new System.Drawing.Size(792, 541);
             this.panel1.TabIndex = 9;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -200,11 +200,11 @@
             // txtErrorOutput
             // 
             this.txtErrorOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtErrorOutput.Location = new System.Drawing.Point(12, 375);
+            this.txtErrorOutput.Location = new System.Drawing.Point(12, 376);
             this.txtErrorOutput.Multiline = true;
             this.txtErrorOutput.Name = "txtErrorOutput";
             this.txtErrorOutput.ReadOnly = true;
-            this.txtErrorOutput.Size = new System.Drawing.Size(351, 175);
+            this.txtErrorOutput.Size = new System.Drawing.Size(351, 217);
             this.txtErrorOutput.TabIndex = 10;
             // 
             // btnPen
@@ -256,7 +256,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1060, 558);
+            this.ClientSize = new System.Drawing.Size(1175, 601);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnPen);

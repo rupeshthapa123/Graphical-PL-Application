@@ -156,7 +156,12 @@ namespace Graphical_PL_Application
                     "\r\n clear =>(Clear drawing area) " +
                     "\r\n reset =>(Move pen position to default)" +
                     "\r\n \r\nDraw Commands :\r\n( Circle radius )\r\n( Rectangle Width,height )" +
-                    "\r\n(Triangle width,height,hypotenus)";
+                    "\r\n(Triangle width,height,hypotenus)" +
+                    "\r\n variable => (radius,width,height,hypotenus,counter) to hold value " +
+                    "\r\n IF => condtion ,If condition then, function, endif " +
+                    "\r\n If example: counter=1,if counter=1 then,circle 100, endif " +
+                    "\r\n Loop => Loop value,function,endloop " +
+                    "\r\n Loop example: loop 5, drawto 10,10 ,circle 100,endloop ";
 
                 txtErrorOutput.Text = help;
             }
